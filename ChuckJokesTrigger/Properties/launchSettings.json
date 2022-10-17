@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "ChuckJokesTrigger": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7238",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "JokesAmount": "10",
+        "DbName": "TheBestOfChuck.sqlite",
+        "ConnectionString": "Data Source=TheBestOfChuck.sqlite;Version=3;",
+        "Api_Endpoint": "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random",
+        "X-RapidAPI-Key": "7d1c7e0e93msh862ff46220878abp16e85djsn5714a9699430",
+        "X-RapidAPI-Host": "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
+        "accept": "application/json"
+      }
+    }
+  }
+}
