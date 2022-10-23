@@ -5,16 +5,18 @@ namespace TheBestOfChuck.Service
 {
     public class Service
     {
-        private IBestOfChuckRepo _bestOfChuckRepo;
+        private readonly IBestOfChuckRepo _bestOfChuckRepo;
+        private readonly JokeClient _jokeClient;
 
-        public Service(IBestOfChuckRepo bestOfChuckRepo)
+        public Service(IBestOfChuckRepo bestOfChuckRepo, JokeClient jokeClient)
         {
             _bestOfChuckRepo = bestOfChuckRepo;
+            _jokeClient = jokeClient;
         }
 
         public async Task<string> GetJokeAsync()
         {
-            var jokeClient = await JokeClient.GetJokeClientAsync();
+            var jokeClient = await _jokeClient.GetJokeClientAsync();
             await InsertJokeAsync(jokeClient);
             var joke = await GetJokeAsync(jokeClient);
             return joke;
@@ -22,7 +24,7 @@ namespace TheBestOfChuck.Service
 
         public async Task<List<string>> GetSpecificAmountOfJokeClientAsync(int jokesAmount)
         {
-            var jokesClient = await JokeClient.GetSpecificAmountOfJokeClientAsync(jokesAmount);
+            var jokesClient = await _jokeClient.GetSpecificAmountOfJokeClientAsync(jokesAmount);
             await InsertJokeAsync(jokesClient);
             var jokes = await GetAllJokesAsync();
             return jokes;
