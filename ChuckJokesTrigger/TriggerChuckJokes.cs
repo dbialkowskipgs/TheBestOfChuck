@@ -25,7 +25,9 @@ namespace ChuckJokesTrigger
             if (!int.TryParse(jokesAmount, out var jokesAmountResult))
                 throw new Exception("can't parse jokes amount to integer");
 
-            var jokes = await _service.GetSpecificAmountOfJokeClientAsync(jokesAmountResult);
+            var jokesFromClient = await _service.GetSpecificAmountOfJokeClientAsync(jokesAmountResult);
+            await _service.InsertJokesAsync(jokesFromClient);
+            var jokes = await _service.GetAllJokesAsync();
             foreach (var joke in jokes)
             {
                 _logger.LogInformation("JOKE: {joke}",joke);

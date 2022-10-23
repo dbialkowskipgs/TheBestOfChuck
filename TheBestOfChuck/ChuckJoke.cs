@@ -23,10 +23,17 @@ namespace TheBestOfChuck
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
+            var jokesAmount = Environment.GetEnvironmentVariable("JokesAmount");
+            if (!int.TryParse(jokesAmount, out var jokesAmountResult))
+                throw new Exception("can't parse jokes amount to integer");
 
-            var joke = await _service.GetJokeAsync();
-            await response.WriteStringAsync(joke);
-            Console.WriteLine(joke);
+            var jokesFromClient = await _service.GetSpecificAmountOfJokeClientAsync(jokesAmountResult);
+            await _service.InsertJokesAsync(jokesFromClient);
+            var jokes = await _service.GetAllJokesAsync();
+            foreach (var joke in jokes)
+            {
+                _logger.LogInformation("JOKE: {joke}", joke);
+            }
 
             return response;
         }

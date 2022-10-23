@@ -1,4 +1,5 @@
-﻿using TheBestOfChuck.SQLite;
+﻿using System.Text.RegularExpressions;
+using TheBestOfChuck.SQLite;
 
 namespace TheBestOfChuck.Service
 {
@@ -21,12 +22,12 @@ namespace TheBestOfChuck.Service
             return joke;
         }
 
-        public async Task<List<string>> GetSpecificAmountOfJokeClientAsync(int jokesAmount)
+        public async Task<List<JokeClientDto>> GetSpecificAmountOfJokeClientAsync(int jokesAmount)
         {
             var jokesClient = await _jokeClient.GetSpecificAmountOfJokeClientAsync(jokesAmount);
-            await InsertJokeAsync(jokesClient);
-            var jokes = await GetAllJokesAsync();
-            return jokes;
+            //await InsertJokeAsync(jokesClient);
+            //var jokes = await GetAllJokesAsync();
+            return jokesClient;
         }
 
         private async Task InsertJokeAsync(JokeClientDto jokeClient)
@@ -35,7 +36,7 @@ namespace TheBestOfChuck.Service
             await _bestOfChuckRepo.InsertAsync(jokeClient.Id, jokeClient.Value);
         }
 
-        private async Task InsertJokeAsync(List<JokeClientDto> jokeClient)
+        public async Task InsertJokesAsync(List<JokeClientDto> jokeClient)
         {
             var jokes = new Dictionary<string, string>();
             foreach (var joke in jokeClient)
@@ -52,7 +53,7 @@ namespace TheBestOfChuck.Service
             return await _bestOfChuckRepo.GetByIdAsync(jokeClient.Id);
         }
 
-        private async Task<List<string>> GetAllJokesAsync()
+        public async Task<List<string>> GetAllJokesAsync()
         {
             return await _bestOfChuckRepo.GetAll();
         }
