@@ -1,5 +1,6 @@
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using TheBestOfChuck.Service;
 
 namespace ChuckJokesTrigger
@@ -21,17 +22,23 @@ namespace ChuckJokesTrigger
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             _logger.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");
 
-            var jokesAmount = Environment.GetEnvironmentVariable("JokesAmount");
-            if (!int.TryParse(jokesAmount, out var jokesAmountResult))
-                throw new Exception("can't parse jokes amount to integer");
-
-            var jokesFromClient = await _service.GetSpecificAmountOfJokeClientAsync(jokesAmountResult);
+            var jokesAmount = GetJokesAmount();
+            var jokesFromClient = await _service.GetSpecificAmountOfJokeClientAsync(jokesAmount);
             await _service.InsertJokesAsync(jokesFromClient);
             var jokes = await _service.GetAllJokesAsync();
             foreach (var joke in jokes)
             {
                 _logger.LogInformation("JOKE: {joke}",joke);
             }
+        }
+
+        private int GetJokesAmount()
+        {
+            var jokesAmount = Environment.GetEnvironmentVariable("JokesAmount");
+            if (!int.TryParse(jokesAmount, out var jokesAmountResult))
+                throw new Exception("can't parse jokes amount to integer");
+
+            return jokesAmountResult;
         }
     }
 }
