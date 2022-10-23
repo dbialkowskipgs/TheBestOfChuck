@@ -5,14 +5,14 @@ using Microsoft.Extensions.Logging;
 
 namespace TheBestOfChuck
 {
-    public class Function1
+    public class ChuckJoke
     {
         private readonly ILogger _logger;
         private readonly Service.Service _service;
-        public Function1(ILoggerFactory loggerFactory, Service.Service service)
+        public ChuckJoke(ILoggerFactory loggerFactory, Service.Service service)
         {
             _service = service;
-            _logger = loggerFactory.CreateLogger<Function1>();
+            _logger = loggerFactory.CreateLogger<ChuckJoke>();
         }
 
         [Function("ChuckJoke")]

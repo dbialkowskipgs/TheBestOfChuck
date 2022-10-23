@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TheBestOfChuck;
 using TheBestOfChuck.SQLite;
 using TheBestOfChuck.Repo;
 using System.Data.SQLite;
