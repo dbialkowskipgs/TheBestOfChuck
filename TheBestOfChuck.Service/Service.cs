@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TheBestOfChuck.SQLite;
+﻿using TheBestOfChuck.SQLite;
 
 namespace TheBestOfChuck.Service
 {
     public class Service
     {
         private readonly IBestOfChuckRepo _bestOfChuckRepo;
-        private readonly JokeClient _jokeClient;
+        private readonly IJokeClient _jokeClient;
 
-        public Service(IBestOfChuckRepo bestOfChuckRepo, JokeClient jokeClient)
+        public Service(IBestOfChuckRepo bestOfChuckRepo, IJokeClient jokeClient)
         {
             _bestOfChuckRepo = bestOfChuckRepo;
             _jokeClient = jokeClient;

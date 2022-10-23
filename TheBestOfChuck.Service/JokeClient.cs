@@ -2,11 +2,18 @@
 
 namespace TheBestOfChuck.Service
 {
-    public class JokeClient
+    public class JokeClient : IJokeClient
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public JokeClient(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public async Task<JokeClientDto> GetJokeClientAsync()
         {
-            var client = new HttpClient();
+            var client = _httpClientFactory.CreateClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -39,4 +46,4 @@ namespace TheBestOfChuck.Service
             return jokes;
         }
     }
-}
+    }

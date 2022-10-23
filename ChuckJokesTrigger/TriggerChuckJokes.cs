@@ -15,7 +15,7 @@ namespace ChuckJokesTrigger
             _logger = loggerFactory.CreateLogger<TriggerChuckJokes>();
         }
 
-        [Function("Function1")]
+        [Function("TriggerChuckJokes")]
         public async Task Run([TimerTrigger("%TriggerSchedule%")] MyInfo myTimer)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");

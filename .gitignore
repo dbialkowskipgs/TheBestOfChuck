@@ -12,3 +12,5 @@
 /TheBestOfChuck.Service/obj
 /TheBestOfChuck.SQLite/bin/Debug/net6.0
 /TheBestOfChuck.SQLite/obj
+/ChuckJokesTrigger/Properties/launchSettings.json
+/TheBestOfChuck/Properties/launchSettings.json

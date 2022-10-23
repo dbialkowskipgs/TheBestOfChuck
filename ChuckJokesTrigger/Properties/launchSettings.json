@@ -9,7 +9,7 @@
         "DbName": "TheBestOfChuck.sqlite",
         "ConnectionString": "Data Source=TheBestOfChuck.sqlite;Version=3;",
         "Api_Endpoint": "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random",
-        "X-RapidAPI-Key": "",
+        "X-RapidAPI-Key": "df1275cc4cmsh756f8fb9c673404p1b74e0jsna05aaecaacd3",
         "X-RapidAPI-Host": "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
         "accept": "application/json"
       }

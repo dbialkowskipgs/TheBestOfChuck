@@ -12,12 +12,14 @@ var host = new HostBuilder()
             services.AddScoped<IBestOfChuckRepo, BestOfChuckRepo>();
             services.AddScoped<Service>();
             services.AddScoped<SQLiteConfiguration>();
+            services.AddScoped<IJokeClient, JokeClient>();
             services.AddScoped(_ =>
             {
                 var sessionFactory =
                     new SQLiteConnectionFactory(Environment.GetEnvironmentVariable("ConnectionString") ?? throw new InvalidOperationException());
                 return sessionFactory;
             });
+            services.AddHttpClient<JokeClient>();
         })
     .Build();
 await CreateSqLiteDatabase();
